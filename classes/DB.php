@@ -5,7 +5,8 @@ class DB extends PDO{
 	private $DB_NAME;
 	private $DB_USER;
 	private $DB_PWD;
-	protected static $instance;
+	// protected static $instance;
+	protected $instance;
 	public function __Construct($params=0){
 		
 		// 取得設定檔資料夾的參數
@@ -26,25 +27,21 @@ class DB extends PDO{
 			break;
 			
 		}
-		self::$instance = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PWD);
-		var_dump(self::$instance);
-		// $link = mysql_connect($DB_HOST, $DB_USER, $DB_PWD);
-		// mysql_select_db($DB_NAME, $link);
-		// mysql_set_charset('UTF-8', $link);
+		// 設定連線參數
+		$this->instance = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PWD);
+		
 	}
+	// 測試sql Query 是否正常輸出
 	public function queryTable(){
-		
-		$instance =self::$instance;
-		var_dump($instance);
-		$instance->prepare("select * from member");
-		
-		$instance->execute();
-
-		return $instance;
+		// $instance = $this->instance;
+		// 利用建構子產生的實體進行查詢，並取得結果
+		$test = $this->instance->query("describe member");
+		$result = $test->fetchAll();
+		return $result;
 	}
 
 
 }
-$db = new DB(1);
+$db = new DB(0);
 $test = $db->queryTable();
 var_dump($test);
