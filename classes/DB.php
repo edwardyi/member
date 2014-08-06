@@ -7,7 +7,7 @@ class DB extends PDO{
 	private $DB_PWD;
 	// protected static $instance;
 	protected $instance;
-	public function __Construct($params=0){
+	public function __construct($params=0){
 		
 		// 取得設定檔資料夾的參數
 		switch ($params) {
@@ -29,6 +29,7 @@ class DB extends PDO{
 		}
 		// 設定連線參數
 		$this->instance = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PWD);
+		return $this->instance;
 		
 	}
 	// 測試sql Query 是否正常輸出
@@ -44,4 +45,4 @@ class DB extends PDO{
 }
 $db = new DB(0);
 $test = $db->queryTable();
-var_dump($test);
+// var_dump($test);

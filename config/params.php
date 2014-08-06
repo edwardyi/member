@@ -10,3 +10,4 @@ define("HOST1",'localhost');
 define("DATABASE_NAME1",'edward');
 define("DATABASE_USERNAME1",'root');
 define("DATABASE_PASSWORD1",'');
+
