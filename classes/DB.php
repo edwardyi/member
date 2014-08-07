@@ -1,6 +1,6 @@
 <?php 
 require_once("../config/params.php");
-class DB extends PDO{
+class DB {
 	private $DB_HOST;
 	private $DB_NAME;
 	private $DB_USER;

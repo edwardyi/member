@@ -1,25 +1,20 @@
-<?php 
-require_once("../config/params.php");
-// 此類別希望能在產生建構子時，使用autoload來載入相對應的類別
-class Member{
-	private $table;
-	
-	public function __construct($db){
-		// 取不到pdo建構子QQ
-		$test = $db->query("describe member");
-		$result = $test->fetchAll();
-		// new DB();
-		echo "Ya!";
-	}
-	
-}
-// 在建構子外面使用autoload方法載入其他類別
+<?php
 function __autoload($class_name) {
     include $class_name . '.php';
 }
-$db = new DB(1);
-new Member($db);
+$obj = new medoo();
+$query = $obj->exec("describe member");
+var_dump($query);
 
+$obj2 = new medoo(["database_type"=>"mysql","database_name"=>"webauth","server"=>"localhost","username"=>"root","password"=>""]);
+$data = $obj2->select("user_pwd",["name"]);
+$data2 = $obj2->select("user_pwd","name");
+var_dump($data);
+var_dump($data2);
 
-
-
+$obj2 = new medoo(["database_type"=>"mysql","database_name"=>"webauth","server"=>"localhost","username"=>"root","password"=>""]);
+// var_dump($obj2);
+// $result = $obj->fetchAll();
+// foreach ($query as $key => $value) {
+// 	echo $value;
+// }
