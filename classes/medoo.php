@@ -1,5 +1,4 @@
 <?php
-require_once("../config/params.php");
 /*!
  * Medoo database framework
  * http://medoo.in
