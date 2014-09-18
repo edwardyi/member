@@ -10,6 +10,7 @@ $smarty->assign('title','會員管理');
 $smarty->assign('Name','登入');
 
 $smarty->display('templates/header.tpl');
+$smarty->display('templates/menu.tpl');
 $smarty->display('templates/memberForm.tpl');
 $smarty->display('templates/footer.tpl');
 ?>

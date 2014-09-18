@@ -91,12 +91,12 @@ $database = new Database();
 // $database->bind(':role_control_div', '1,3,5,7');
 // $database->execute();
 
-$database->query('INSERT INTO member (name, role, role_id, account, password) VALUES (:name, :role, :role_id, :account, :password);');
-$database->bind(':name', 'John');
-$database->bind(':role_id', '2');
-$database->bind(':account', 'John');
-$database->bind(':password', '1');
-$database->execute();
+// $database->query('INSERT INTO member (name,  role_id, account, password) VALUES (:name,  :role_id, :account, :password);');
+// $database->bind(':name', 'John');
+// $database->bind(':role_id', '5');
+// $database->bind(':account', 'John');
+// $database->bind(':password', '1');
+// $database->execute() ;
 
 
-echo $database->lastInsertId();
+// echo $database->lastInsertId();

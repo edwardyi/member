@@ -1,20 +1,33 @@
-<?php
-function __autoload($class_name) {
-    include $class_name . '.php';
+<?php 
+namespace Edward\Models;
+require_once("MemberInterface.php");
+
+
+class PDOMember implements IMember{
+	private $pdo;
+	public function __construct($pdo){
+		$this->$pdo = $pdo;
+	}
+	public function getMemberById($member_id){
+		$sql = "SELECT * FROM member WHERE mid =:mid";
+		$stmt = $this->pdo->prepare($sql);
+		if($stmt->execute(array(":mid"=>$member_id))){
+			return $stmt->fetch();
+		}else{
+			return null;
+		}
+	}
+	public function getRole($member_id){
+		$sql = "SELECT m.name,r.role_name FROM `member` m LEFT JOIN `role` r ON m.role_id = r.rid WHERE m.mid=:mid";
+		$stmt = $this->pdo->prepare($sql);
+		if($stmt->execute(array(":mid"=>$member_id))){
+			return $stmt->fetch();
+		}else{
+			return null;
+		}
+	}
 }
-$obj = new medoo();
-$query = $obj->exec("describe member");
-var_dump($query);
-
-$obj2 = new medoo(["database_type"=>"mysql","database_name"=>"webauth","server"=>"localhost","username"=>"root","password"=>""]);
-$data = $obj2->select("user_pwd",["name"]);
-$data2 = $obj2->select("user_pwd","name");
-var_dump($data);
-var_dump($data2);
-
-$obj2 = new medoo(["database_type"=>"mysql","database_name"=>"webauth","server"=>"localhost","username"=>"root","password"=>""]);
-// var_dump($obj2);
-// $result = $obj->fetchAll();
-// foreach ($query as $key => $value) {
-// 	echo $value;
-// }
+$pdo = new PDO("localhost", "root", "");
+$member = new PDOMember($pdo);
+$result = $member->getMemberById("1");
+var_dump($result);
